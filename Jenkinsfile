@@ -22,12 +22,19 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(
                     credentialsId:"dockerHubCreds",
-                    usernameVariable: "dockerHubUser",
-                    passwordVariable: "dockerHubPass"
+                    usernameVariable: "AWS_ACCESS_KEY_ID",
+                    passwordVariable: "AWS_ACCESS_KEY_ID"
                 )]){
                     sh '''
-                    echo $dockerHubPass | docker login -u $dockerHubUser --password-stdin
-                    docker push $dockerHubUser/flask-app:latest
+                    AWS_REGION=eu-west-1
+                    ECR_REPO=381790627235.dkr.ecr.eu-west-1.amazonaws.com/flask-app
+
+                    # Login to ECR
+                    aws ecr get-login-password --region $AWS_REGION | \
+                    docker login --username AWS --password-stdin 381790627235.dkr.ecr.eu-west-1.amazonaws.com
+
+                    docker tag flask-app:latest $ECR_REPO:latest
+                    docker push $ECR_REPO:latest
                     '''
                 }
             }
