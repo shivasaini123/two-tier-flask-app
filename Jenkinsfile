@@ -23,7 +23,7 @@ pipeline{
                 withCredentials([usernamePassword(
                     credentialsId:"aws-creds",
                     usernameVariable: "AWS_ACCESS_KEY_ID",
-                    passwordVariable: "AWS_ACCESS_KEY_ID"
+                    passwordVariable: "AWS_SECRET_ACCESS_KEY"
                 )]){
                     sh '''
                     AWS_REGION=eu-west-1
