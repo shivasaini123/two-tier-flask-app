@@ -10,7 +10,7 @@ pipeline{
             }
         stage("build"){
             steps{
-                sh "docker build -t 381790627235.dkr.ecr.eu-west-1.amazonaws.com/flask-app:latest ."
+                sh "docker build -t flask-app:latest ."
             }
         }
         stage("test"){
@@ -33,7 +33,8 @@ pipeline{
                     # Login to ECR
                     aws ecr get-login-password --region $AWS_REGION | \
                     docker login --username AWS --password-stdin 381790627235.dkr.ecr.eu-west-1.amazonaws.com
-
+                    
+                    docker build -t flask-app:latest .
                     docker tag flask-app:latest $ECR_REPO:latest
                     docker push $ECR_REPO:latest
                     '''
