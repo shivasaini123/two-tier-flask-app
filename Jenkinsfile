@@ -18,10 +18,10 @@ pipeline{
                 echo "test completed successfully"
             }
         }
-        stage("push to docker hub"){
+        stage("push to ecr"){
             steps{
                 withCredentials([usernamePassword(
-                    credentialsId:"dockerHubCreds",
+                    credentialsId:"aws-creds",
                     usernameVariable: "AWS_ACCESS_KEY_ID",
                     passwordVariable: "AWS_ACCESS_KEY_ID"
                 )]){
