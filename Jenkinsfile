@@ -21,7 +21,7 @@ pipeline{
         stage("push to ecr"){
             steps{
                 withCredentials([usernamePassword(
-                    $class: 'AmazonWebServicesCredentialsBinding'
+                    $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId:"aws-creds",
                     usernameVariable: "AWS_ACCESS_KEY_ID",
                     passwordVariable: "AWS_SECRET_ACCESS_KEY"
