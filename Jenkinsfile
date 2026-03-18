@@ -20,12 +20,12 @@ pipeline{
         }
         stage("push to ecr"){
             steps{
-                withCredentials([usernamePassword(
+                withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId:"aws-creds",
                     usernameVariable: "AWS_ACCESS_KEY_ID",
                     passwordVariable: "AWS_SECRET_ACCESS_KEY"
-                )]){
+                ]]){
                     sh '''
                     AWS_REGION=eu-west-1
                     ECR_REPO=381790627235.dkr.ecr.eu-west-1.amazonaws.com/flask-app
