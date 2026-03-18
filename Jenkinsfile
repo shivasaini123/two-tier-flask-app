@@ -10,7 +10,7 @@ pipeline{
             }
         stage("build"){
             steps{
-                sh "docker build -t shivasaini7618/flask-app:latest ."
+                sh "docker build -t 381790627235.dkr.ecr.eu-west-1.amazonaws.com/flask-app:latest ."
             }
         }
         stage("test"){
